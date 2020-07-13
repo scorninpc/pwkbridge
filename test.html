@@ -1,0 +1,91 @@
+<html>
+	<head>
+		<style>
+			* {
+				margin: 0;
+				background: #efeeee
+			}
+			body {
+				margin: 5px;
+			}
+			.button input {
+				display: none;
+			}
+		</style>
+	</head>
+	<body>
+		<button id="btnSize">Size</button>
+		<button id="btnMessage">Message</button>
+		<button id="btnResize">Block Resize</button>
+		<button id="btnClose">Close</button>
+		<button id="btnNewWindow">New Window</button>
+		<label class="button" for="dirPicker">
+			<button id="btnOpendir">Open Dir</button>
+			<input id="dirPicker" type="file" webkitdirectory multiple />
+		</label>
+		<input id="dirPicker1" type="file" webkitdirectory multiple />
+
+		<br>
+
+	</body>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js" crossorigin="anonymous"></script>
+
+	<script>
+		$(function() {
+
+			PWKBridge.show();
+
+			$('#btnSize').on('click', function() {
+				PWKBridge.resize(800, 600);
+			});
+
+			$('#btnResize').on('click', function() {
+				PWKBridge.setFixedSize(800, 600);
+			});
+
+			$('#btnMessage').on('click', function() {
+				PWKBridge.messageBox("mensagem");
+			});
+
+			$('#btnClose').on('click', function() {
+				PWKBridge.close();
+			});
+
+			$('#btnNewWindow').on('click', function() {
+				PWKBridge.newWindow("file:///home/scorninpc/Desktop/Bruno/pwkbridge/qt/test.html");
+			});
+
+
+
+			$('#btnOpendir').on('click', function() {
+				btnOpendir
+			});
+
+			$('#dirPicker').on('change', function() {
+				$(this)
+			});
+
+
+
+
+			let picker = document.getElementById('dirPicker1')
+
+			picker.addEventListener('change', (event) => {
+			  let files = event.target.files
+			  let list = document.getElementById('list')
+			  list.innerHTML = 'You selected these files:'
+
+			  for (let i = 0; i < files.length; i++) {
+			    let file = files[i]
+			    list.innerHTML += '<br>' + file.webkitRelativePath
+			  }
+			})
+
+
+
+		});
+	</script>
+
+
+</html>
