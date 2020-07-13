@@ -11,7 +11,7 @@ int main(int argc, char *argv[])
 	QApplication app(argc, argv);
 
 	JSBridge *jsBridge_ = new JSBridge(true);
-	jsBridge_->openUrl("file:///home/scorninpc/Desktop/Bruno/pwkbridge/qt/autobackup.html");
+	jsBridge_->openUrl("file:///home/scorninpc/Desktop/Bruno/pwkbridge/test.html");
 	
 	return app.exec();
 }

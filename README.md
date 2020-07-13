@@ -11,3 +11,7 @@ $ apt install qt5-default libqt5webkit5-dev
 $ QT_SELECT=qt5 qmake
 $ make
 ```
+
+# Shots
+
+[![Shot1](https://i.imgur.com/SouIg9A.png)](https://i.imgur.com/SouIg9A.png)
