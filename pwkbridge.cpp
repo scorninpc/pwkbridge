@@ -10,8 +10,13 @@ int main(int argc, char *argv[])
 	
 	QApplication app(argc, argv);
 
-	JSBridge *jsBridge_ = new JSBridge(true);
-	jsBridge_->openUrl("file:///home/scorninpc/Desktop/Bruno/pwkbridge/test.html");
+	// get config
+	QSettings my_settings("config.ini", QSettings::IniFormat);
+	QString config_url = my_settings.value("URL", "").toString();
+	bool config_debug = my_settings.value("debug", "").toBool();
+
+	JSBridge *jsBridge_ = new JSBridge(config_debug);
+	jsBridge_->openUrl(config_url);
 	
 	return app.exec();
 }

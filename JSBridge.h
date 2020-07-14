@@ -16,6 +16,7 @@ class JSBridge : public QObject
 
 	private slots:
 		void _finishLoading(bool);
+		void _report(QNetworkReply*reply);
 
 	public slots:
 		void messageBox(const QString &message);

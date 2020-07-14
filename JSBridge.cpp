@@ -6,16 +6,28 @@ JSBridge::JSBridge(bool debug)
 	JSBridge::_debug = debug;
 
 	JSBridge::_view = new QWebView();
-
-	JSBridge::_view->resize(300, 200);
 	
+	// on load finish to bridge c++ object
 	QObject::connect(JSBridge::_view, SIGNAL(loadFinished(bool)), SLOT(_finishLoading(bool)));
 
+	// error print
+	QNetworkAccessManager *nam = JSBridge::_view->page()->networkAccessManager(); 
+	QObject::connect(nam, SIGNAL(finished(QNetworkReply*)), SLOT(_report(QNetworkReply*)));
+
+	// if debug enabled, show inspect on context menu
 	if(JSBridge::_debug) {
 		JSBridge::_view->page()->settings()->setAttribute(QWebSettings::DeveloperExtrasEnabled, true);
 	}
 
 	// view->setWindowFlags(Qt::Drawer);
+}
+
+void JSBridge::_report(QNetworkReply*reply)
+{
+	int error = reply->error();
+	if(error > 0) {
+		qDebug() << "url: " << QString("%1").arg(error);
+	}
 }
 
 void JSBridge::_finishLoading(bool)
@@ -59,5 +71,10 @@ void JSBridge::newWindow(const QString &url)
 
 void JSBridge::openUrl(const QString &url) 
 {
-	JSBridge::_view->setUrl(QUrl::fromUserInput(url));
+	try {
+		JSBridge::_view->setUrl(QUrl::fromUserInput(url));
+	}
+	catch (char param) {
+		qDebug() << "An exception occurred. Exception Nr. " << param << '\n';
+	}
 }
