@@ -20,11 +20,10 @@
 		<button id="btnClose">Close</button>
 		<button id="btnNewWindow">New Window</button>
 		<label class="button" for="dirPicker">
-			<button id="btnOpendir">Open Dir</button>
+			<button id="btnOpendir">Select File</button>
 			<input id="dirPicker" type="file" webkitdirectory multiple />
 		</label>
 		<br><br>
-		<input id="dirPicker1" type="file" webkitdirectory multiple />
 
 		<br>
 
@@ -59,8 +58,6 @@
 				PWKBridge.newWindow("file:///home/scorninpc/Desktop/Bruno/pwkbridge/test.html");
 			});
 
-
-
 			$('#btnOpendir').on('click', function() {
 				btnOpendir
 			});
@@ -68,24 +65,6 @@
 			$('#dirPicker').on('change', function() {
 				$(this)
 			});
-
-
-
-
-			let picker = document.getElementById('dirPicker1')
-
-			picker.addEventListener('change', (event) => {
-			  let files = event.target.files
-			  let list = document.getElementById('list')
-			  list.innerHTML = 'You selected these files:'
-
-			  for (let i = 0; i < files.length; i++) {
-			    let file = files[i]
-			    list.innerHTML += '<br>' + file.webkitRelativePath
-			  }
-			})
-
-
 
 		});
 	</script>
