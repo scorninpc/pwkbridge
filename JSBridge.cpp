@@ -59,5 +59,5 @@ void JSBridge::newWindow(const QString &url)
 
 void JSBridge::openUrl(const QString &url) 
 {
-	JSBridge::_view->setUrl(QUrl(url));
+	JSBridge::_view->setUrl(QUrl::fromUserInput(url));
 }

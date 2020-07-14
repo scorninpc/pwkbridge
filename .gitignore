@@ -9,6 +9,7 @@
 *.so.*
 *.dll
 *.dylib
+pwkbridge
 
 # Qt-es
 object_script.*.Release
@@ -53,4 +54,3 @@ compile_commands.json
 
 *_qmlcache.qrc
 
-pwkbridge
