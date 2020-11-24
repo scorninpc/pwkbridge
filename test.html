@@ -6,14 +6,26 @@
 				background: #efeeee
 			}
 			body {
-				margin: 5px;
+				margin: 0px;
+				padding: 0px;
 			}
 			.button input {
 				display: none;
 			}
+
+			#titleBar {
+				width: 100%;
+				height: 40px;
+				background: blue;
+				margin-bottom: 10px;
+			}
 		</style>
 	</head>
 	<body>
+		<div id="titleBar">
+			
+		</div>
+
 		<button id="btnSize">Size</button>
 		<button id="btnMessage">Message</button>
 		<button id="btnResize">Block Resize</button>
@@ -66,6 +78,36 @@
 			$('#dirPicker').on('change', function() {
 				$(this)
 			});
+
+
+			var isMoving = false,
+				movingX = 0,
+				movingY = 0;
+
+			$('#titleBar').on({
+				mousedown: function(e) {
+					isMoving = true;
+					movingX = e.pageX;
+					movingY = e.pageY;
+				},
+				mouseup: function(e) {
+					isMoving = false;
+				},
+				mousemove: function(e) {
+					if(isMoving) {
+						var x = e.pageX - movingX;
+						var y = e.pageY - movingY;
+
+						console.log(x, y);
+
+						var pos = JSON.parse(PWKBridge.pos());
+						PWKBridge.move(parseInt(pos.x)+x, parseInt(pos.y)+y);
+
+						console.log(parseInt(pos.x)+x, parseInt(pos.y)+y);
+
+					}
+				}
+			})
 
 		};
 	</script>

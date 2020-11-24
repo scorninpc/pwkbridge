@@ -24,7 +24,9 @@ class JSBridge : public QObject
 		void setFixedSize(int width, int height);
 		void show();
 		void close();
+		QString pos();
 		void maximize();
+		void move(int x, int y);
 		void newWindow(const QString &url);
 		void openUrl(const QString &url);
 

@@ -6,7 +6,12 @@ JSBridge::JSBridge(bool debug)
 	JSBridge::_debug = debug;
 
 	JSBridge::_view = new QWebView();
-	
+
+	JSBridge::_view->setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
+	// JSBridge::_view->setStyleSheet("QMainWindow { margin: 0px; padding: 0px; }");
+	// JSBridge::_view->setContentsMargins(0,0,0,0);
+
+
 	// on load finish to bridge c++ object
 	QObject::connect(JSBridge::_view, SIGNAL(loadFinished(bool)), SLOT(_finishLoading(bool)));
 
@@ -62,6 +67,21 @@ void JSBridge::messageBox(const QString &message)
 	QMessageBox msgBox;
 	msgBox.setText(message);
 	msgBox.exec();
+}
+
+void JSBridge::move(int x, int y)
+{
+	QPoint p(x, y);
+	JSBridge::_view->move(p);
+}
+
+QString JSBridge::pos()
+{
+	QPoint pos = JSBridge::_view->pos();
+
+	QString ret = QString("{\"x\":\"%1\",\"y\":\"%2\"}").arg(pos.x()).arg(pos.y());
+
+	return ret;
 }
 
 void JSBridge::resize(int width, int height)

@@ -19,6 +19,7 @@ int main(int argc, char *argv[])
 	// set icon
 	app.setWindowIcon(QIcon(config_icon));
 
+
 	// run webkit
 	JSBridge *jsBridge_ = new JSBridge(config_debug);
 	jsBridge_->openUrl(config_url);
